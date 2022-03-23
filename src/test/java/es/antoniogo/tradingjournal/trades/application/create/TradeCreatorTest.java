@@ -12,13 +12,9 @@ final class TradeCreatorTest {
         TradeRepository repository = mock(TradeRepository.class);
         TradeCreator creator = new TradeCreator(repository);
 
-        CreateTradeRequest request = new CreateTradeRequest("e65430b5-0aca-44d8-971b-c9533e80cd8e", "symbol", "side");
+        CreateTradeRequest request = CreateTradeRequestMother.random();
 
-        Trade trade = new Trade(
-                new TradeId(request.getId()),
-                new TradeSymbol(request.getSymbol()),
-                new TradeSide(request.getSide())
-        );
+        Trade trade = TradeMother.fromRequest(request);
 
         creator.create(request);
 
