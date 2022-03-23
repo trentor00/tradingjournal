@@ -1,5 +1,6 @@
 package es.antoniogo.tradingjournal.trades.application.create;
 
+import es.antoniogo.tradingjournal.shared.domain.bus.event.EventBus;
 import es.antoniogo.tradingjournal.trades.domain.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -7,18 +8,21 @@ import org.springframework.stereotype.Service;
 @Service
 public final class TradeCreator {
     private TradeRepository repository;
+    private final EventBus eventBus;
 
-    public TradeCreator(@Qualifier("mySqlTradeRepository") TradeRepository repository) {
+    public TradeCreator(@Qualifier("mySqlTradeRepository") TradeRepository repository, EventBus eventBus) {
         this.repository = repository;
+        this.eventBus = eventBus;
     }
 
     public void create(CreateTradeRequest request) {
-        Trade trade = new Trade(
-                new TradeId(request.getId()),
-                new TradeSymbol(request.getSymbol()),
-                new TradeSide(request.getSide())
-        );
+        TradeId tradeId = new TradeId(request.getId());
+        TradeSymbol tradeSymbol = new TradeSymbol(request.getSymbol());
+        TradeSide tradeSide = new TradeSide(request.getSide());
+
+        Trade trade = Trade.create(tradeId, tradeSymbol, tradeSide);
 
         repository.save(trade);
+        eventBus.publish(trade.pullDomainEvents());
     }
 }

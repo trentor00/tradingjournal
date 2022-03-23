@@ -13,7 +13,7 @@ final class TradeCreatorTest extends TradesModuleUnitTestCase {
     protected void setUp() {
         super.setUp();
 
-        creator = new TradeCreator(repository);
+        creator = new TradeCreator(repository, eventBus);
     }
 
     @Test
@@ -21,6 +21,7 @@ final class TradeCreatorTest extends TradesModuleUnitTestCase {
         CreateTradeRequest request = CreateTradeRequestMother.random();
 
         Trade trade = TradeMother.fromRequest(request);
+        TradeCreatedDomainEvent domainEvent = TradeCreatedDomainEventMother.fromTrade(trade);
 
         creator.create(request);
 

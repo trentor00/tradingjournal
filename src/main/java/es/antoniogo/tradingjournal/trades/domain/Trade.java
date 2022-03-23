@@ -1,16 +1,26 @@
 package es.antoniogo.tradingjournal.trades.domain;
 
+import es.antoniogo.tradingjournal.shared.domain.AggregateRoot;
+
 import java.util.Objects;
 
-public class Trade {
-    private TradeId id;
-    private TradeSymbol symbol;
-    private TradeSide side;
+public class Trade extends AggregateRoot {
+    private final TradeId id;
+    private final TradeSymbol symbol;
+    private final TradeSide side;
 
     public Trade(TradeId id, TradeSymbol symbol, TradeSide side) {
         this.id = id;
         this.symbol = symbol;
         this.side = side;
+    }
+
+    public static Trade create(TradeId id, TradeSymbol symbol, TradeSide side) {
+        Trade trade = new Trade(id, symbol, side);
+
+        trade.record(new TradeCreatedDomainEvent(id.getValue(), symbol.getValue(), side.getValue()));
+
+        return trade;
     }
 
     public TradeId getId() {
