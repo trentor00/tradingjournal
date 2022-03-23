@@ -12,8 +12,8 @@ public final class TradeCreator {
         this.repository = repository;
     }
 
-    public void create(String id, String symbol, String side) {
-        Trade trade = new Trade(id, symbol, side);
+    public void create(CreateTradeRequest request) {
+        Trade trade = new Trade(request.getId(), request.getSymbol(), request.getSide());
 
         repository.save(trade);
     }

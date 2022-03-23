@@ -1,5 +1,6 @@
 package es.antoniogo.tradingjournal.trades.infrastructure.controller;
 
+import es.antoniogo.tradingjournal.trades.application.create.CreateTradeRequest;
 import es.antoniogo.tradingjournal.trades.application.create.TradeCreator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,8 @@ public final class TradesPutController {
     }
 
     @PutMapping("/trades/{id}")
-    public ResponseEntity create(@PathVariable String id, @RequestBody Request request) {
-        creator.create(id, request.getSymbol(), request.getSide());
+    public ResponseEntity<String> create(@PathVariable String id, @RequestBody Request request) {
+        creator.create(new CreateTradeRequest(id, request.getSymbol(), request.getSide()));
 
         return new ResponseEntity(HttpStatus.CREATED);
     }

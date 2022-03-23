@@ -15,7 +15,7 @@ final class TradeCreatorTest {
 
         Trade trade = new Trade("some-id", "some-symbol", "some-side");
 
-        creator.create(trade.getId(), trade.getSymbol(), trade.getSide());
+        creator.create(new CreateTradeRequest(trade.getId(), trade.getSymbol(), trade.getSide()));
 
         verify(repository, atLeastOnce()).save(trade);
     }
