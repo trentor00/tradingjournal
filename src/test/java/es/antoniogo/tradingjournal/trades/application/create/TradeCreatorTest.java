@@ -1,23 +1,29 @@
 package es.antoniogo.tradingjournal.trades.application.create;
 
+import es.antoniogo.tradingjournal.trades.TradesModuleUnitTestCase;
 import es.antoniogo.tradingjournal.trades.domain.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.mockito.Mockito.*;
+final class TradeCreatorTest extends TradesModuleUnitTestCase {
 
-final class TradeCreatorTest {
+    private TradeCreator creator;
+
+    @BeforeEach
+    protected void setUp() {
+        super.setUp();
+
+        creator = new TradeCreator(repository);
+    }
 
     @Test
-    void save_a_valid_trade() {
-        TradeRepository repository = mock(TradeRepository.class);
-        TradeCreator creator = new TradeCreator(repository);
-
+    void create_a_valid_trade() {
         CreateTradeRequest request = CreateTradeRequestMother.random();
 
         Trade trade = TradeMother.fromRequest(request);
 
         creator.create(request);
 
-        verify(repository, atLeastOnce()).save(trade);
+        shouldHaveSaved(trade);
     }
 }
