@@ -1,13 +1,14 @@
 package es.antoniogo.tradingjournal.trades.application.create;
 
 import es.antoniogo.tradingjournal.trades.domain.*;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
 public final class TradeCreator {
     private TradeRepository repository;
 
-    public TradeCreator(TradeRepository repository) {
+    public TradeCreator(@Qualifier("mySqlTradeRepository") TradeRepository repository) {
         this.repository = repository;
     }
 

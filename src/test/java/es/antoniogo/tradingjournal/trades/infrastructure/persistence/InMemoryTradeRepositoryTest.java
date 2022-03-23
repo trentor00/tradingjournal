@@ -1,4 +1,4 @@
-package es.antoniogo.tradingjournal.trades.infrastructure;
+package es.antoniogo.tradingjournal.trades.infrastructure.persistence;
 
 import es.antoniogo.tradingjournal.trades.TradesModuleInfrastructureTestCase;
 import es.antoniogo.tradingjournal.trades.domain.*;
@@ -15,20 +15,20 @@ final class InMemoryTradeRepositoryTest extends TradesModuleInfrastructureTestCa
     void save_a_trade() {
         Trade trade = TradeMother.random();
 
-        repository.save(trade);
+        inMemoryTradeRepository.save(trade);
     }
 
     @Test
     void return_an_existing_trade() {
         Trade trade = TradeMother.random();
 
-        repository.save(trade);
+        inMemoryTradeRepository.save(trade);
 
-        assertEquals(Optional.of(trade), repository.search(trade.getId()));
+        assertEquals(Optional.of(trade), inMemoryTradeRepository.search(trade.getId()));
     }
 
     @Test
     void not_find_a_non_existing_trade() {
-        assertFalse(repository.search(TradeIdMother.random()).isPresent());
+        assertFalse(inMemoryTradeRepository.search(TradeIdMother.random()).isPresent());
     }
 }

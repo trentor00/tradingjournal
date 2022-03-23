@@ -1,4 +1,4 @@
-package es.antoniogo.tradingjournal.trades.infrastructure;
+package es.antoniogo.tradingjournal.trades.infrastructure.persistence;
 
 import es.antoniogo.tradingjournal.trades.domain.Trade;
 import es.antoniogo.tradingjournal.trades.domain.TradeId;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.HashMap;
 import java.util.Optional;
 
-@Repository
+@Repository("inMemoryTradeRepository")
 public class InMemoryTradeRepository implements TradeRepository {
 
     private HashMap<TradeId, Trade> trades = new HashMap<>();
