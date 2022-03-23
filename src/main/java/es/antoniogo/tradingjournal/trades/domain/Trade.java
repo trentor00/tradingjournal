@@ -3,25 +3,25 @@ package es.antoniogo.tradingjournal.trades.domain;
 import java.util.Objects;
 
 public class Trade {
-    private String id;
-    private String symbol;
-    private String side;
+    private TradeId id;
+    private TradeSymbol symbol;
+    private TradeSide side;
 
-    public Trade(String id, String symbol, String side) {
+    public Trade(TradeId id, TradeSymbol symbol, TradeSide side) {
         this.id = id;
         this.symbol = symbol;
         this.side = side;
     }
 
-    public String getId() {
+    public TradeId getId() {
         return id;
     }
 
-    public String getSymbol() {
+    public TradeSymbol getSymbol() {
         return symbol;
     }
 
-    public String getSide() {
+    public TradeSide getSide() {
         return side;
     }
 
