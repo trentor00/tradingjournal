@@ -1,9 +1,10 @@
 package es.antoniogo.tradingjournal.shared.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
-public abstract class Identifier {
+public abstract class Identifier implements Serializable {
     private String value;
 
     public Identifier(String value) {

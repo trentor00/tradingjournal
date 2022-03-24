@@ -26,5 +26,6 @@ final class TradeCreatorTest extends TradesModuleUnitTestCase {
         creator.create(request);
 
         shouldHaveSaved(trade);
+        shouldHavePublished(domainEvent);
     }
 }
