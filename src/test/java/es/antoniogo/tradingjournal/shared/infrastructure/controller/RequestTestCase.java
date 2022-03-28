@@ -3,6 +3,7 @@ package es.antoniogo.tradingjournal.shared.infrastructure.controller;
 import es.antoniogo.tradingjournal.shared.domain.bus.event.DomainEvent;
 import es.antoniogo.tradingjournal.shared.domain.bus.event.EventBus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;

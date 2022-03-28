@@ -5,8 +5,10 @@ import es.antoniogo.tradingjournal.trades.domain.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
-public final class TradeCreator {
+public class TradeCreator {
     private TradeRepository repository;
     private final EventBus eventBus;
 
@@ -15,6 +17,7 @@ public final class TradeCreator {
         this.eventBus = eventBus;
     }
 
+    @Transactional
     public void create(CreateTradeRequest request) {
         TradeId tradeId = new TradeId(request.getId());
         TradeSymbol tradeSymbol = new TradeSymbol(request.getSymbol());

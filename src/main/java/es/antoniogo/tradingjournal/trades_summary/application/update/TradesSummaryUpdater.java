@@ -6,8 +6,10 @@ import es.antoniogo.tradingjournal.trades_summary.domain.TradesSummary;
 import es.antoniogo.tradingjournal.trades_summary.domain.TradesSummaryRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
-public final class TradesSummaryUpdater {
+public class TradesSummaryUpdater {
     private TradesSummaryRepository repository;
     private UuidGenerator uuidGenerator;
 
@@ -16,6 +18,7 @@ public final class TradesSummaryUpdater {
         this.uuidGenerator = uuidGenerator;
     }
 
+    @Transactional
     public void update(TradeId id) {
         TradesSummary tradesSummary = repository.search()
                 .orElseGet(() -> TradesSummary.initialize(uuidGenerator.generate()));

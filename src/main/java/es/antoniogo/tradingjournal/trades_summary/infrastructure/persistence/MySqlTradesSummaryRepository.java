@@ -9,8 +9,6 @@ import es.antoniogo.tradingjournal.trades_summary.infrastructure.persistence.jpa
 import es.antoniogo.tradingjournal.trades_summary.infrastructure.persistence.jpa.TradesSummaryRepositoryJPA;
 import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -25,7 +23,6 @@ public class MySqlTradesSummaryRepository implements TradesSummaryRepository {
     }
 
     @Override
-    @Transactional
     public void save(TradesSummary tradesSummary) {
         TradesSummaryJPA tradesSummaryJPA = new TradesSummaryJPA(
                 tradesSummary.getId().getValue(),

@@ -1,28 +1,21 @@
 package es.antoniogo.tradingjournal.trades_summary.infrastructure.persistence.jpa;
 
-import com.vladmihalcea.hibernate.type.json.JsonStringType;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
+import es.antoniogo.tradingjournal.shared.infrastructure.persistence.ListConverter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Entity(name="TradesSummary")
 @Table(name="trades_summary")
-@TypeDef(name = "json", typeClass = JsonStringType.class)
 public class TradesSummaryJPA implements Serializable {
     @Id
     private String id;
 
     private Integer total;
 
-    @Type(type = "json")
-    @Column(columnDefinition = "json")
+    @Convert(converter = ListConverter.class)
     private List<String> existingTrades;
 
     public TradesSummaryJPA(String id, Integer total, List<String> existingTrades) {

@@ -1,13 +1,14 @@
-package es.antoniogo.tradingjournal.shared.infrastructure.bus.event;
+package es.antoniogo.tradingjournal.shared.infrastructure.bus.event.spring;
 
 import es.antoniogo.tradingjournal.shared.domain.bus.event.DomainEvent;
 import es.antoniogo.tradingjournal.shared.domain.bus.event.EventBus;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service("springApplicationEventBus")
 public class SpringApplicationEventBus implements EventBus {
     private final ApplicationEventPublisher publisher;
 

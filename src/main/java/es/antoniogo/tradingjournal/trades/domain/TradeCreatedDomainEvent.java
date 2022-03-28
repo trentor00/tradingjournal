@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public final class TradeCreatedDomainEvent extends DomainEvent<TradeCreatedDomainEvent> {
-    private final String symbol;
-    private final String side;
+    private String symbol;
+    private String side;
 
     public TradeCreatedDomainEvent(String aggregateId, String symbol, String side) {
         super(aggregateId);
@@ -30,13 +30,20 @@ public final class TradeCreatedDomainEvent extends DomainEvent<TradeCreatedDomai
         this.side = side;
     }
 
+    public TradeCreatedDomainEvent() {
+        super(null);
+
+        this.symbol     = null;
+        this.side = null;
+    }
+
     @Override
     public String eventName() {
         return "trade.created";
     }
 
     @Override
-    protected HashMap<String, Serializable> toPrimitives() {
+    public HashMap<String, Serializable> toPrimitives() {
         return new HashMap<String, Serializable>() {{
             put("symbol", symbol);
             put("side", side);
@@ -44,7 +51,7 @@ public final class TradeCreatedDomainEvent extends DomainEvent<TradeCreatedDomai
     }
 
     @Override
-    protected TradeCreatedDomainEvent fromPrimitives(
+    public TradeCreatedDomainEvent fromPrimitives(
             String aggregateId,
             HashMap<String, Serializable> body,
             String eventId,
